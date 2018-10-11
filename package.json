@@ -1,0 +1,22 @@
+{
+  "name": "krowdy-challenge",
+  "version": "1.0.0",
+  "description": "Challenge for FullStack Development",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/jnreynoso/krowdy-challenge.git"
+  },
+  "keywords": [
+    "challenge"
+  ],
+  "author": "Jean Alessi Reynoso Mena",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jnreynoso/krowdy-challenge/issues"
+  },
+  "homepage": "https://github.com/jnreynoso/krowdy-challenge#readme"
+}

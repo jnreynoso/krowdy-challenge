@@ -1,0 +1,22 @@
+{
+  "plugins": [
+    "transform-class-properties",
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "libraryDirectory": "es",
+        "style": true
+      }
+    ],
+    [
+      "module-resolver", {
+        "root": ["./src"],
+        "alias": {
+          "layouts": "./src/layouts",
+          "components": "./src/components"
+        }
+      }
+    ]
+  ]
+}

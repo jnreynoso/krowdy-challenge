@@ -4,6 +4,7 @@
   "description": "Challenge for FullStack Development",
   "main": "index.js",
   "scripts": {
+    "start": "parcel src/index.html --no-cache",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,5 +19,21 @@
   "bugs": {
     "url": "https://github.com/jnreynoso/krowdy-challenge/issues"
   },
-  "homepage": "https://github.com/jnreynoso/krowdy-challenge#readme"
+  "homepage": "https://github.com/jnreynoso/krowdy-challenge#readme",
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "babel-plugin-import": "^1.9.1",
+    "babel-plugin-module-resolver": "^3.1.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "less": "^2.7.3",
+    "parcel-bundler": "^1.10.3"
+  },
+  "dependencies": {
+    "antd": "^3.10.0",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "styled-components": "^3.4.10"
+  }
 }

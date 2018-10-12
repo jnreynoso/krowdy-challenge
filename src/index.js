@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter, Route } from 'react-router-dom'
 import Routes from './routes'
 
-import 'antd/dist/antd.less'
+import 'antd/dist/antd.css'
 
 const Root = () => (
   <BrowserRouter>

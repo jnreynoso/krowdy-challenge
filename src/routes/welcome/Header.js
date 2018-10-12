@@ -2,7 +2,7 @@ import React from 'react'
 import { Col, Row } from 'antd'
 import styled from 'styled-components'
 
-import { Avatar } from 'components'
+import { Avatar, VerticalLine } from 'components'
 
 const Wrapper = styled.div`
   margin: 34px 25px 28px 35px;
@@ -25,11 +25,10 @@ const WMessage = styled.div`
 `
 
 const Message = () => (
-  <div>
+  <div style= {{ marginLeft: '40px' }}>
     <WTitle>
       Bievenido
     </WTitle>
-    <br />
     <WMessage>
       Desde aquí y con tu cuenta de Krowdy podras acceder rápidamente a tus herramientas y funciones para proteger tus datos y tu privacidad.
     </WMessage>
@@ -43,6 +42,7 @@ const Header = () => {
         <Col span={12}>
           <Avatar />
         </Col>
+        <VerticalLine />
         <Col span={12}>
           <Message />
         </Col>

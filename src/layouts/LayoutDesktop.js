@@ -12,7 +12,7 @@ import {
 } from 'components'
 
 const Row = styled.div`
-  width: auto
+  width: auto;
 `
 
 const LayoutDesktop = View => (

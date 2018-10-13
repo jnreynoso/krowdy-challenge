@@ -7,7 +7,7 @@ import Account from './account'
 const { TabPane } = Tabs
 
 const Wrapper = styled.div`
-  height: 40px
+  height: 40px;
 `
 
 const Main = () => (

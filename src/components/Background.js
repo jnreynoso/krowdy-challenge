@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const Background = styled.div`
-  height: 100%;
+  height: auto;
   background-color: #FAFAFA;
 `
 

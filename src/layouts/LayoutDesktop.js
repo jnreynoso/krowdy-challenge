@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Layout } from 'antd'
 
 import styled from 'styled-components'
 
@@ -11,26 +10,31 @@ import {
   Header
 } from 'components'
 
+const Wrapper = styled.div`
+  height: 100%;
+`
 const Row = styled.div`
   font-family: Roboto;
-  width: auto;
+  width: 100%;
 `
 
 const LayoutDesktop = View => (
   class extends Component {
     render () {
       return (
-        <Background>
-          <Center>
-            <Row>
-              <Header />
-              <Content>
-                <View />
-              </Content>
-              <Footer />
-            </Row>
-          </Center>
-        </Background>
+        <Wrapper>
+          <Background>
+            <Center>
+              <Row>
+                <Header />
+                <Content>
+                  <View />
+                </Content>
+                <Footer />
+              </Row>
+            </Center>
+          </Background>
+        </Wrapper>
       )
     }
   }

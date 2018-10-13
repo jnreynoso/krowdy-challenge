@@ -82,51 +82,51 @@ const Account = () => {
                 <Title>Números de celular</Title>
                 <Description>Añade un número de ceular para hacer mas sgura tu cuenta.</Description>
               </div>
-              }
-  key='collapse-phone'
-    >
-      <Phone />
-    </Panel>
-    <Panel
-    showArrow={false}
-    header={
-      <div>
-        <Title>Cambiar contraseña</Title>
-        <Description>Crea una contreña única para poder proteger tu cuenta.</Description>
-      </div>
-      }
-  key='collapse-change-password'
-    >
-      <ChangePassword />
-    </Panel>
-    <Panel
-    showArrow={false}
-    header={
-      <div>
-        <Title>Conexiones</Title>
-        <Description>Redes sociales a conectadas a tu cuenta de Krowdy.</Description>
-      </div>
-      }
-  key='collapse-connections'
-    >
-      <Connections />
-    </Panel>
-    <Panel
-    showArrow={false}
-    header={
-      <div>
-        <Title>Gestión de cuenta</Title>
-        <Description>Aqui podras cerrar tu cuenta si deseas.</Description>
-      </div>
-      }
-  key='collapse-account-management'
-    >
-      <AccountManagement />
-    </Panel>
-  </Collapse>
-</Content>
+            }
+            key='collapse-phone'
+          >
+            <Phone />
+          </Panel>
+          <Panel
+            showArrow={false}
+            header={
+              <div>
+                <Title>Cambiar contraseña</Title>
+                <Description>Crea una contreña única para poder proteger tu cuenta.</Description>
+              </div>
+            }
+            key='collapse-change-password'
+          >
+            <ChangePassword />
+          </Panel>
+          <Panel
+            showArrow={false}
+            header={
+              <div>
+                <Title>Conexiones</Title>
+                <Description>Redes sociales a conectadas a tu cuenta de Krowdy.</Description>
+              </div>
+            }
+            key='collapse-connections'
+          >
+            <Connections />
+          </Panel>
+          <Panel
+            showArrow={false}
+            header={
+              <div>
+                <Title>Gestión de cuenta</Title>
+                <Description>Aqui podras cerrar tu cuenta si deseas.</Description>
+              </div>
+            }
+            key='collapse-account-management'
+          >
+            <AccountManagement />
+          </Panel>
+        </Collapse>
+      </Content>
     </Layout>
-    )
+  )
 }
 
 export default Account

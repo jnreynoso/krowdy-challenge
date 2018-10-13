@@ -14,7 +14,8 @@
         "root": ["./src"],
         "alias": {
           "layouts": "./src/layouts",
-          "components": "./src/components"
+          "components": "./src/components",
+          "images": "./public/images"
         }
       }
     ]

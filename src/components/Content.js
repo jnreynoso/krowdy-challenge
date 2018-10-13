@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { Center } from 'components'
-import { Row, Col } from 'antd'
 
 const Wrapper = styled.div`
   background-color: #FFFFFF;
@@ -10,6 +9,7 @@ const Wrapper = styled.div`
   height: 754px;
   width: 1080px;
   margin-top: 8px;
+  overflow: auto
 `
 
 const Content = props => {

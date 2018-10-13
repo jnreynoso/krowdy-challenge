@@ -1,9 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Avatar, List, Skeleton } from 'antd'
+import { List, Skeleton } from 'antd'
 
 const { Item } = List
 const { Meta } = Item
+
+const Wrapper = styled.div`
+  padding-left: 24px;
+`
 
 const Title = styled.div`
   font-weight: bold;
@@ -74,11 +78,15 @@ const Login = () => {
   }]
 
   return (
-    <List
-      itemLayout="horizontal"
-      dataSource={list}
-      renderItem={Items}
-    />
+    <Wrapper>
+      <List
+        itemLayout='horizontal'
+        dataSource={list}
+        renderItem={Items}
+      />
+      <br />
+      <a>Añadir correo</a>
+    </Wrapper>
   )
 }
 

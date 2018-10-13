@@ -12,6 +12,7 @@ import {
 } from 'components'
 
 const Row = styled.div`
+  font-family: Roboto;
   width: auto;
 `
 

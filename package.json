@@ -16,7 +16,7 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "build": "react-app-rewired build && echo '/* /index.html 200' > build/_redirects",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "lint": "./node_modules/.bin/standard",

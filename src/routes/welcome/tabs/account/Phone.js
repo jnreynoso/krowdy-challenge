@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Auth } from 'aws-amplify'
 import { Row, Col, Button, Form, Input, Select } from 'antd'
 import styled from 'styled-components'
 
@@ -29,7 +30,7 @@ const WrapperPhone = styled.div`
 
 class Phone extends Component {
   state = {
-    showView: 'addNumber'
+    showView: 'codeNumber'
   }
 
   backAddNumber = () => {
@@ -42,6 +43,31 @@ class Phone extends Component {
     this.setState({
       showView: 'formNumber'
     })
+  }
+
+  sendCode = async () => {
+    const {
+      form: {
+        getFieldValue
+      }
+    } = this.props
+
+    const number = getFieldValue('phone')
+    const prefix = getFieldValue('prefix')
+
+    const phone_number = `+${prefix}${number}`
+
+    console.log(phone_number)
+    const user = await Auth.currentAuthenticatedUser()
+    const result = await Auth.updateUserAttributes(user, {
+      phone_number
+    })
+
+    const session = await Auth.currentSession()
+    const { idToken: { payload } } = session
+    await user.refreshSession(session.refreshToken)
+
+    debugger
   }
 
   render () {
@@ -85,45 +111,81 @@ class Phone extends Component {
         case 'formNumber':
           component = (
             <div>
-              {getFieldDecorator('phone', {
-                rules: [{ required: true, message: 'Please input your phone number!' }]
-              })(
-                <WrapperPhone>
+              <WrapperPhone>
+                <Row>
                   <Row>
-                    <Row>
-                      <Col span={12} {...colProps}>
+                    <Col span={12} {...colProps}>
+                      {getFieldDecorator('phone', {
+                        rules: [{ required: true, message: 'Please input your phone number!' }]
+                      })(
                         <Input
                           style={{ width: '350px' }}
                           addonBefore={prefixSelector}
                         />
-                      </Col>
-                      <Col span={4} {...colProps}>
-                        <Button
-                          style={{ backgroundColor: '#108EE9' }}
-                          type='primary'
-                        >
-                          Enviar código
-                        </Button>
-                      </Col>
-                      <Col span={6} {...colProps}>
-                        <Button
-                          onClick={this.backAddNumber}
-                          style={{ backgroundColor: '#108EE9' }}
-                          type='primary'
-                        >
-                          Cancelar
-                        </Button>
-                      </Col>
-                    </Row>
-                    <Row>
-                      Enviaremos un código a este número; lo necesitarás en el último paso.
-                    </Row>
+                      )}
+                    </Col>
+                    <Col span={4} {...colProps}>
+                      <Button
+                        onClick={this.sendCode}
+                        style={{ backgroundColor: '#108EE9' }}
+                        type='primary'
+                      >
+                        Enviar código
+                      </Button>
+                    </Col>
+                    <Col span={6} {...colProps}>
+                      <Button
+                        onClick={this.backAddNumber}
+                        style={{ backgroundColor: '#108EE9' }}
+                        type='primary'
+                      >
+                        Cancelar
+                      </Button>
+                    </Col>
                   </Row>
-                </WrapperPhone>
-              )}
+                  <Row>
+                    Enviaremos un código a este número; lo necesitarás en el último paso.
+                  </Row>
+                </Row>
+              </WrapperPhone>
             </div>
           )
           break
+        case 'codeNumber':
+          component = (
+            <div>
+              <Row>
+                <Row style={{ paddingBottom: '10px' }}>
+                  <Col span={18}>
+                    Tu número de teléfono nos ayuda a mantener la seguridad de tu cuenta.
+                    Introduce el código de verificación que acabamos de enviar al número *** *** ***.
+                  </Col>
+                </Row>
+                <Row>
+                  <Col span={7}>
+                    {getFieldDecorator('phone', {
+                      rules: [{ required: true, message: 'Please input your phone number!' }]
+                    })(
+                      <Input style={{ width: '200px' }} />
+                    )}
+                  </Col>
+                  <Col span={3}>
+                    <Button
+                      style={{
+                        backgroundColor: '#108EE9'
+                      }}
+                      type='primary'
+                    >
+                      Validar
+                    </Button>
+                  </Col>
+                  <Col span={6}>
+                    <Button>Cancelar</Button>
+                  </Col>
+                </Row>
+              </Row>
+            </div>
+          )
       }
 
       return component

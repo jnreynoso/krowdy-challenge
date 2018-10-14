@@ -41,3 +41,30 @@ export function getEmails () {
 
   return JSON.parse(emails)
 }
+
+export function setPhones (data) {
+  const phonesRaw = localStorage.getItem('phones')
+
+  if (!Array.isArray(data)) {
+    if (phonesRaw) {
+      const phones = JSON.parse(phonesRaw)
+      const matched = phones.filter(e => e.phone_number !== data.phone_number)
+
+      matched.push(data)
+
+      localStorage.setItem('phones', JSON.stringify(matched))
+    } else {
+      const phones = JSON.stringify([data])
+      localStorage.setItem('phones', phones)
+    }
+  } else {
+    const phones = JSON.stringify(data)
+    localStorage.setItem('phones', phones)
+  }
+}
+
+export function getPhones () {
+  const phones = localStorage.getItem('phones')
+
+  return JSON.parse(phones)
+}

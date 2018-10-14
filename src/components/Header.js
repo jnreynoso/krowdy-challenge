@@ -7,6 +7,7 @@ import styled from 'styled-components'
 import { Center } from 'components'
 
 import Logo from 'images/logo.png'
+import AvatarImg from 'images/avatar.png'
 
 const Wrapper = styled.div`
   height: 40px;
@@ -103,7 +104,7 @@ class DropdownUser extends Component {
         placement='bottomRight'
       >
         <span>
-          <Avatar src='https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png' />
+          <Avatar src={AvatarImg} />
           &nbsp; {name}
           &nbsp; <Icon type='down' theme='outlined' />
         </span>

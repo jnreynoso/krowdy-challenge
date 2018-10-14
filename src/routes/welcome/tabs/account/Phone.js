@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
 import { Auth } from 'aws-amplify'
-import { Row, Col, Button, Form, Input, Select } from 'antd'
+import { Row, Col, Button, Form, List, Skeleton, Input, Select } from 'antd'
 import styled from 'styled-components'
+
+import { getPhones } from 'utils'
+
+const { Item } = List
+const { Meta } = Item
 
 const Wrapper = styled.div`
   padding-left: 24px;
@@ -27,10 +32,78 @@ const Description = styled.span`
 const WrapperPhone = styled.div`
  padding: 5px
 `
+const Action = styled.span`
+  color: #1890ff;
+  cursor: pointer;
+`
+const NotVerified = styled.div`
+  height: 22px;
+  width: 90px;
+  border-radius: 11px;
+  background-color: #BFBFBF;}
+  padding-left: 5px;
+  display: inline;
+`
+const NotVerifiedSpan = styled.span`
+  height: 14px;
+  width: 65px;
+  color: #FFFFFF;
+  font-size: 12px;
+  line-height: 14px;
+`
+const WithoutBorder = styled.div`
+  border-bottom: 0px;
+`
+const Items = (item, props) => {
+  const actions = []
+
+  if (item.principal) {
+    actions.push(
+      <span>
+        Movil principal
+      </span>
+    )
+  } else {
+    actions.push(
+      <Action>Seleccionar como principal</Action>
+    )
+
+    actions.push(
+      <Action>Eliminar</Action>
+    )
+  }
+
+  return (
+    <WithoutBorder>
+      <Item
+        actions={actions}
+      >
+        <Skeleton avatar title={false} loading={item.loading} active>
+          <Meta
+            title={
+              <div>
+                <Title>{item.phone_number}</Title>
+                {' '}
+                {
+                  !item.phone_number_verified? (
+                    <NotVerified>
+                      <NotVerifiedSpan>No verificado</NotVerifiedSpan>
+                    </NotVerified>
+                  ) : ('')
+                }
+              </div>
+            }
+          />
+        </Skeleton>
+      </Item>
+    </WithoutBorder>
+  )
+}
 
 class Phone extends Component {
   state = {
-    showView: 'codeNumber'
+    phones: getPhones(),
+    showView: 'formNumber'
   }
 
   backAddNumber = () => {
@@ -55,24 +128,45 @@ class Phone extends Component {
     const number = getFieldValue('phone')
     const prefix = getFieldValue('prefix')
 
-    const phone_number = `+${prefix}${number}`
+    const phone_number = `+${prefix}${number}` // eslint-disable-line
 
-    console.log(phone_number)
     const user = await Auth.currentAuthenticatedUser()
-    const result = await Auth.updateUserAttributes(user, {
+    await Auth.updateUserAttributes(user, {
       phone_number
     })
 
     const session = await Auth.currentSession()
-    const { idToken: { payload } } = session
     await user.refreshSession(session.refreshToken)
 
-    debugger
+    this.setState({
+      showView: 'codeNumber'
+    })
+  }
+
+  validateCode = async () => {
+    const {
+      form: {
+        getFieldValue
+      }
+    } = this.props
+
+    const code = getFieldValue('code')
+
+    try {
+      const result = await Auth.verifyCurrentUserAttributeSubmit(
+        'phone_number',
+        code
+      )
+
+      console.log(result)
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   render () {
     const { form: { getFieldDecorator } } = this.props
-    const { showView } = this.state
+    const { showView, phones } = this.state
 
     const prefixSelector = getFieldDecorator('prefix', {
       initialValue: '51'
@@ -163,14 +257,15 @@ class Phone extends Component {
                 </Row>
                 <Row>
                   <Col span={7}>
-                    {getFieldDecorator('phone', {
-                      rules: [{ required: true, message: 'Please input your phone number!' }]
+                    {getFieldDecorator('code', {
+                      rules: [{ required: true, message: 'Inserte Codigo' }]
                     })(
                       <Input style={{ width: '200px' }} />
                     )}
                   </Col>
                   <Col span={3}>
                     <Button
+                      onClick={this.validateCode}
                       style={{
                         backgroundColor: '#108EE9'
                       }}
@@ -193,9 +288,20 @@ class Phone extends Component {
 
     return (
       <Wrapper>
-        {
-          content()
-        }
+        <div>
+          <div>
+            <List
+              itemLayout='horizontal'
+              dataSource={phones}
+              renderItem={item => Items(item)}
+            />
+          </div>
+          <div>
+            {
+              content()
+            }
+          </div>
+        </div>
       </Wrapper>
     )
   }

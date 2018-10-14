@@ -171,8 +171,6 @@ class NewEmail extends Component {
     const matched = emails.find(e => e.email === email)
     const filter = emails.filter(e => e.email !== email)
 
-    debugger
-
     if (!(matched && email.email_verified)) {
       try {
         const user = await Auth.currentAuthenticatedUser()
@@ -225,7 +223,7 @@ class NewEmail extends Component {
       if (result === 'SUCCESS') {
         const emails = getEmails()
         const matched = emails.find(e => e.principal)
-        const filter = emails.filter(e => !e.principal)
+        const filter = emails.filter(e => !e.principal && e.email !== email)
 
         matched.principal = false
 
@@ -316,7 +314,9 @@ class NewEmail extends Component {
                   <WVerification>Verificación</WVerification>
                 </Row>
                 <Row {...propsRow}>
-                  <WVerificationDescription>Para tu seguridad, introduce tu contraseña para realizar este cambio.</WVerificationDescription>
+                  <WVerificationDescription>
+                    Para tu seguridad, introduce tu contraseña para realizar este cambio.
+                  </WVerificationDescription>
                 </Row>
                 <Row {...propsRow}>
                   <Col span={12}>

@@ -5,7 +5,7 @@ import { Form, Icon, Input, Button, Checkbox } from 'antd'
 import styled from 'styled-components'
 
 import { Center } from 'components'
-import { setEmails } from 'utils'
+import { setEmails, setPhones } from 'utils'
 
 const FormItem = Form.Item
 const Wrapper = styled.div`
@@ -36,6 +36,12 @@ class Login extends Component {
           setEmails({
             email: payload.email,
             email_verified: payload.email_verified,
+            principal: true
+          })
+
+          setPhones({
+            phone_number: payload.phone_number,
+            phone_number_verified: payload.phone_number_verified,
             principal: true
           })
 

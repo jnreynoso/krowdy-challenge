@@ -1,13 +1,24 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import 'antd/dist/antd.less'
-import './index.css'
-import './style.less'
-import * as serviceWorker from './serviceWorker'
+
+import Amplify from 'aws-amplify'
 
 import { BrowserRouter, Route } from 'react-router-dom'
 
+import './style.less'
+
 import Routes from './routes'
+import * as serviceWorker from './serviceWorker'
+
+Amplify.configure({
+  Auth: {
+    identityPoolId: process.env.REACT_APP_AWS_IDENTITY_POOL_ID,
+    region: process.env.REACT_APP_AWS_REGION,
+    userPoolId: process.env.REACT_APP_AWS_USER_POOL_ID,
+    userPoolWebClientId: process.env.REACT_APP_AWS_POOL_WEB_CLIENT_ID,
+    mandatorySignIn: false
+  }
+})
 
 const Root = () => (
   <BrowserRouter>

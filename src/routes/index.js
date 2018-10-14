@@ -1,12 +1,15 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 
 import Welcome from './welcome'
 import Login from './login'
 
 const Routes = () => {
   return (
-    <Route path='/' component={Login} exact />
+    <Switch>
+      <Route path='/' component={Login} exact />
+      <Route path='/account' component={Welcome} exact />
+    </Switch>
   )
 }
 

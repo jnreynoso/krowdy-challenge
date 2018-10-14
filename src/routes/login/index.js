@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
+import { Auth } from 'aws-amplify'
 import { Form, Icon, Input, Button, Checkbox } from 'antd'
 
-import { Center } from 'components'
 import styled from 'styled-components'
+
+import { Center } from 'components'
+import { setEmails } from 'utils'
 
 const FormItem = Form.Item
 const Wrapper = styled.div`
@@ -18,12 +21,28 @@ const Box = styled.div`
 `
 
 class Login extends Component {
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault()
 
-    this.props.form.validateFields((err, values) => {
+    const { history } = this.props
+
+    this.props.form.validateFields(async (err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values)
+        try {
+          const user = await Auth.signIn(values.username, values.password)
+
+          const { signInUserSession: { idToken: { payload } } } = user
+
+          setEmails({
+            email: payload.email,
+            email_verified: payload.email_verified,
+            principal: true
+          })
+
+          if (user) history.push('/account')
+        } catch (e) {
+          console.log(e)
+        }
       }
     })
   }
@@ -40,7 +59,7 @@ class Login extends Component {
             </Center>
             <Form onSubmit={this.handleSubmit}>
               <FormItem>
-                {getFieldDecorator('userName', {
+                {getFieldDecorator('username', {
                   rules: [{ required: true, message: 'Please input your username!' }]
                 })(
                   <Input

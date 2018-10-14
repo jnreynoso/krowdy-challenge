@@ -18,24 +18,13 @@ Krowdy Challenge
 - Modify `.env` for webapp port (optional)
 
 ## 🏗 Core Structure
-    riqra-challenge
-      ├── backend (api.example.com)
-      │   ├── src
-      │   │   ├── config
-      │   │   ├── models
-      │   │   ├── schema
-      │   │   ├── setup
-      │   │   └── index.js
-      │   │
-      │   └── package.json
-      │
+    krowdy-challenge
       ├── frontend (example.com)
       │   ├── public
       │   ├── src
       │   │   ├── components
       │   │   ├── images
-      │   │   ├── mutations
-      │   │   ├── querys
+      │   │   ├── routes
       │   │   ├── styles
       │   │   └── index.js
       │   │
@@ -47,10 +36,5 @@ Krowdy Challenge
 
 ## 📘 Guides
 ### API
-- Adding new Module (Eg: Users):
-  - Copy `/backend/src/models/thought.js` to `/backend/src/models/user.js` and modify the file for table name and respective fields
-  - Add an entry to the `models` object in `/backend/src/models/index.js`
-  - Copy `/backend/src/schema/thoughts` to `/backend/src/schema/users` and modify `type.js`, `resolvers.js` and `fields/query.js` and `fields/mutations.js`
-  - Import `/backend/src/schema/users/fields/query.js` in `/backend/src/schema/query.js`
-  - Import `/backend/src/schema/users/fields/mutations.js` in `/backend/src/schema/mutations.js`
+- Persistence of data with localStorage (practical purposes)
 

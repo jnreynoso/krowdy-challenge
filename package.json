@@ -1,41 +1,39 @@
 {
   "name": "krowdy-challenge",
-  "version": "1.0.0",
-  "description": "Challenge for FullStack Development",
-  "main": "index.js",
-  "scripts": {
-    "start": "parcel src/index.html --no-cache",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/jnreynoso/krowdy-challenge.git"
-  },
-  "keywords": [
-    "challenge"
-  ],
-  "author": "Jean Alessi Reynoso Mena",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jnreynoso/krowdy-challenge/issues"
-  },
-  "homepage": "https://github.com/jnreynoso/krowdy-challenge#readme",
-  "devDependencies": {
-    "@babel/core": "^7.1.2",
-    "babel-plugin-import": "^1.9.1",
-    "babel-plugin-module-resolver": "^3.1.1",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "less": "^2.7.3",
-    "parcel-bundler": "^1.10.3",
-    "standard": "^12.0.1"
-  },
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "antd": "^3.10.0",
-    "public": "^0.1.4",
+    "antd": "^3.10.1",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
+    "react-scripts": "2.0.4",
     "styled-components": "^3.4.10"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "./node_modules/.bin/standard",
+    "lint-fix": "./node_modules/.bin/standard --fix"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "build/*"
+    ]
+  },
+  "devDependencies": {
+    "standard": "^12.0.1"
   }
 }

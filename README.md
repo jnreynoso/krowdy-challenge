@@ -38,3 +38,4 @@ Krowdy Challenge
 ### API
 - Persistence of data with localStorage (practical purposes)
 
+![GitHub Logo](https://s3.amazonaws.com/inticode-public/public/images/krowdy-challenge.png)

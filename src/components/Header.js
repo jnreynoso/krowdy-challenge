@@ -72,6 +72,8 @@ class DropdownUser extends Component {
       case 'configuration':
       case 'account':
         break
+      default:
+        break
     }
   }
 

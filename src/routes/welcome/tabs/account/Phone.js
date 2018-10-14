@@ -3,7 +3,7 @@ import { Auth } from 'aws-amplify'
 import { Row, Col, Button, Form, List, Skeleton, Input, Select } from 'antd'
 import styled from 'styled-components'
 
-import { getPhones } from 'utils'
+import { setPhones, getPhones } from 'utils'
 
 const { Item } = List
 const { Meta } = Item
@@ -85,7 +85,7 @@ const Items = (item, props) => {
                 <Title>{item.phone_number}</Title>
                 {' '}
                 {
-                  !item.phone_number_verified? (
+                  !item.phone_number_verified ? (
                     <NotVerified>
                       <NotVerifiedSpan>No verificado</NotVerifiedSpan>
                     </NotVerified>
@@ -103,7 +103,8 @@ const Items = (item, props) => {
 class Phone extends Component {
   state = {
     phones: getPhones(),
-    showView: 'formNumber'
+    showView: 'formNumber',
+    phone_number: ''
   }
 
   backAddNumber = () => {
@@ -130,17 +131,32 @@ class Phone extends Component {
 
     const phone_number = `+${prefix}${number}` // eslint-disable-line
 
-    const user = await Auth.currentAuthenticatedUser()
-    await Auth.updateUserAttributes(user, {
-      phone_number
-    })
+    const phones = getPhones()
+    const matched = phones.find(e => e.phone_number === phone_number) // eslint-disable-line
 
-    const session = await Auth.currentSession()
-    await user.refreshSession(session.refreshToken)
+    if (!matched) {
+      const user = await Auth.currentAuthenticatedUser()
+      await Auth.updateUserAttributes(user, {
+        phone_number
+      })
 
-    this.setState({
-      showView: 'codeNumber'
-    })
+      const session = await Auth.currentSession()
+      await user.refreshSession(session.refreshToken)
+
+      phones.push({
+        phone_number,
+        phone_number_verified: false,
+        principal: false
+      })
+
+      setPhones(phones)
+
+      this.setState({
+        phone_number,
+        phones,
+        showView: 'codeNumber'
+      })
+    }
   }
 
   validateCode = async () => {
@@ -150,6 +166,8 @@ class Phone extends Component {
       }
     } = this.props
 
+    const { phones, phone_number } = this.state // eslint-disable-line
+
     const code = getFieldValue('code')
 
     try {
@@ -158,10 +176,40 @@ class Phone extends Component {
         code
       )
 
+      if (result === 'SUCCESS') {
+        const matched = phones.find(e => e.principal)
+        const filtered = phones.filter(
+          e => !e.principal && e.phone_number !== phone_number // eslint-disable-line
+        )
+
+        matched.principal = false
+
+        filtered.push({
+          phone_number,
+          phone_number_verified: true,
+          principal: true
+        })
+
+        filtered.push(
+          matched
+        )
+
+        setPhones(filtered)
+        this.setState({
+          phones: filtered
+        })
+      }
+
       console.log(result)
     } catch (e) {
       console.log(e)
     }
+  }
+
+  cancelCode = () => {
+    this.setState({
+      showView: 'formNumber'
+    })
   }
 
   render () {
@@ -275,12 +323,15 @@ class Phone extends Component {
                     </Button>
                   </Col>
                   <Col span={6}>
-                    <Button>Cancelar</Button>
+                    <Button onClick={this.cancelCode}>Cancelar</Button>
                   </Col>
                 </Row>
               </Row>
             </div>
           )
+          break
+        default:
+          break
       }
 
       return component

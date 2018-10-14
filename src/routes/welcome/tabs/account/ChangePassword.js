@@ -55,6 +55,9 @@ class ChangePassword extends Component {
               break
             case 'InvalidParameterException':
               state.messageInvalidPassword = true
+              break
+            default:
+              break
           }
 
           this.setState(state)

@@ -199,8 +199,6 @@ class NewEmail extends Component {
       } catch (e) {
         const state = {}
 
-        console.log(e)
-
         if (e.code === 'LimitExceededException') {
           state.messageFail = 'Se ha superado el límite de intentos, por favor intente después de un tiempo.'
         } else {
@@ -251,6 +249,8 @@ class NewEmail extends Component {
         case 'CodeMismatchException':
         case 'ExpiredCodeException':
           state.messageFail = e.message
+          break
+        default:
           break
       }
 
@@ -304,8 +304,8 @@ class NewEmail extends Component {
             <Row>
               <Col span={3}>
                 <img
+                  alt='Shield'
                   style={{ marginTop: '15px' }}
-                  alg='Shield'
                   src={ImgShield}
                 />
               </Col>

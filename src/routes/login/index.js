@@ -104,7 +104,9 @@ class Login extends Component {
                 })(
                   <Checkbox>Remember me</Checkbox>
                 )}
-                <a style={{ float: 'right' }} href=''>Forgot password</a>
+                {
+                  <a style={{ float: 'right' }} href=''>Forgot password</a> // eslint-disable-line
+                }
                 <Button
                   type='primary'
                   htmlType='submit'
@@ -114,7 +116,9 @@ class Login extends Component {
                 >
                   Log in
                 </Button>
-                Or <a href=''>register now!</a>
+                Or {
+                  <a href=''>register now!</a> // eslint-disable-line
+                }
               </FormItem>
             </Form>
           </Box>

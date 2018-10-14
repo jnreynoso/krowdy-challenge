@@ -22,6 +22,11 @@ const WithoutBorder = styled.div`
   border-bottom: 0px;
 `
 
+const Action = styled.span`
+  color: #1890ff;
+  cursor: pointer;
+`
+
 const Items = (item) => {
   const actions = []
 
@@ -34,16 +39,16 @@ const Items = (item) => {
   } else {
     if (!item.verified) {
       actions.push(
-        <a>Reenviar verificación</a>
+        <Action>Reenviar verificación</Action>
       )
     } else {
       actions.push(
-        <a>Seleccionar como principal</a>
+        <Action>Seleccionar como principal</Action>
       )
     }
 
     actions.push(
-      <a>Eliminar</a>
+      <Action>Eliminar</Action>
     )
   }
 
@@ -85,7 +90,7 @@ const Login = () => {
         renderItem={Items}
       />
       <br />
-      <a>Añadir correo</a>
+      <Action>Añadir correo</Action>
     </Wrapper>
   )
 }

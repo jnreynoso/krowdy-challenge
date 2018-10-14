@@ -23,7 +23,7 @@ const Header = () => {
     <Center>
       <Wrapper>
         <WImage>
-          <img src={Logo} />
+          <img alt='Logo' src={Logo} />
         </WImage>
       </Wrapper>
     </Center>

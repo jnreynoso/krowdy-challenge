@@ -28,12 +28,17 @@ const WithoutBorder = styled.div`
   border-bottom: 0px;
 `
 
+const Action = styled.span`
+  color: #1890ff;
+  cursor: pointer;
+`
+
 const Items = item => {
   return (
     <WithoutBorder>
       <Item
         actions={[
-          <a>Revocar acceso</a>
+          <Action>Revocar acceso</Action>
         ]}
       >
         <Skeleton avatar title={false} loading={item.loading} active>

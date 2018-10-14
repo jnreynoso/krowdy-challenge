@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 import { Tabs, Icon } from 'antd'
 
 import Account from './account'

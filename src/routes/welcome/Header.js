@@ -12,6 +12,7 @@ const WTitle = styled.div`
   font-family: Roboto;
   font-size: 24px;
   line-height: 28px;
+  margin-bottom: 8px;
 `
 
 const WMessage = styled.div`
@@ -40,7 +41,7 @@ const Message = () => (
       </Col>
       <Col span={8}>
         <WImage>
-          <img src={WelcomeImg} />
+          <img alt='Secure' src={WelcomeImg} />
         </WImage>
       </Col>
     </Row>
